@@ -14,7 +14,7 @@ app.whenReady().then(async()=>{
  const put=(name,content)=>fs.writeFileSync(root+'/artworks/'+name+'.html',content);
  put('fx',art('function fxpreview(){};firstDraw();setTimeout(()=>fxpreview(),80)'));
  put('p5',art('window.p5=function(){};p5.prototype.noLoop=function(){};firstDraw();setTimeout(()=>new p5().noLoop(),80)'));
- const config={repetitions:3,holdMs:220,fadeMs:60,readyTimeoutMs:2000,watchdogMs:4000,artworks:[{id:'fx',path:'artworks/fx.html',completion:'fxpreview'},{id:'p5',path:'artworks/p5.html',completion:'noLoop'}]};
+ const config={shuffle:false,repetitions:3,holdMs:220,fadeMs:60,readyTimeoutMs:2000,watchdogMs:4000,artworks:[{id:'fx',path:'artworks/fx.html',completion:'fxpreview'},{id:'p5',path:'artworks/p5.html',completion:'noLoop'}]};
  server=createServer(root,config);await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
  win=new BrowserWindow({width:640,height:480,show:true,fullscreen:false,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true,backgroundThrottling:false}});
  win.webContents.session.webRequest.onBeforeRequest((d,cb)=>cb({cancel:!isAllowedRequest(d.url,origin)}));
@@ -95,5 +95,20 @@ app.whenReady().then(async()=>{
  config.readyTimeoutMs=2000;config.artworks=[{id:'setup',path:'artworks/setup.html',completion:'setup'}];
  await win.loadURL(origin);await until('playerState().current?.started&&!playerState().advancing','async setup visible before done');assert.equal((await js('playerState()')).current.done,false);
  await js(frame+'.contentWindow.finishSetup()');await until('playerState().current.done','async setup genuine done');assert.equal(await js(frame+'.contentWindow.finalDraw'),true);console.log('PASS async setup paints before completion');
+
+ put('shuffle',art('firstDraw();'));
+ config.shuffle=true;config.repetitions=3;config.holdMs=100000;config.fadeMs=0;
+ config.artworks=Array.from({length:8},(_,i)=>({id:'shuffle-'+i,path:'artworks/shuffle.html',completion:'manual'}));
+ await win.loadURL(origin);await until('playerState().current?.started&&!playerState().advancing','shuffle first frame');
+ const observed=[];
+ for(let n=0;n<48;n++){
+  const current=(await js('playerState()')).current;observed.push(current);
+  assert.equal(current.round,Math.floor(n/24));assert.equal(current.slot,Math.floor(n/3)%8);assert.equal(current.repeat,n%3);
+  if(n%3)assert.equal(current.id,observed[n-1].id);
+  if(n<47){await key();await until('playerState().current?.token!=='+JSON.stringify(current.token)+'&&playerState().current?.started&&!playerState().advancing','shuffle generation '+n);}
+ }
+ for(let r=0;r<2;r++){const ids=observed.slice(r*24,(r+1)*24).filter((_,i)=>i%3===0).map(a=>a.id);assert.equal(new Set(ids).size,8);}
+ assert.notEqual(observed[23].id,observed[24].id);
+ console.log('PASS two shuffled rounds: each of 8 works exactly once, 3 consecutive generations, no seam repeat');
  console.log('ELECTRON_INTEGRATION_PASS');
 }).catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{if(win)win.destroy();if(server)server.close();if(root)fs.rmSync(root,{recursive:true,force:true});app.exit(process.exitCode||0);});

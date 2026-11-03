@@ -27,9 +27,10 @@ npm start -- --display 0
 修改 artworks/manifest.json 裡的 config，例如：
 
 ~~~json
-{"repetitions":3,"holdMs":10000,"fadeMs":600,"watchdogMs":600000}
+{"shuffle":true,"repetitions":3,"holdMs":10000,"fadeMs":600,"watchdogMs":600000}
 ~~~
 
+- shuffle：預設 true，每輪洗牌；false 依作品清單順序
 - repetitions：同件作品連續生成次數
 - holdMs：作品真正完成生成後，停留多久才切換
 - fadeMs：每個淡出／淡入階段的時間（預設各 600ms，合計 1.2 秒，另加黑畫面等待載入／開始的時間）
@@ -39,7 +40,7 @@ npm start -- --display 0
 
 載入與啟動各受 readyTimeoutMs 限制（預設各 30 秒）。腳本錯誤、啟動失敗或逾時維持黑畫面並顯示錯誤，按 →／空白鍵可跳過恢復；錯誤不會當作完成。非 canvas 的自訂作品需在真正開始繪製時發送 artwork-player-started window event，不能用 load 假裝開始。
 
-作品清單的順序就是輪播順序；跑完後回到第一件。不同作品可在各自 entry 覆寫 holdMs 和 watchdogMs。不要把載入完成當作繪製完成；完成判定依各作品經檢查的 adapter。
+每輪會將全部作品隨機排列一次，同輪不重複抽到同件；每件仍依 repetitions 連續生成 3 次再換下一件。全部播過才重新洗牌，並避免跨輪連續同件（多件作品時）。shuffle=false 可恢復清單順序。手動或錯誤後跳過會消耗當次排定生成，不會重開整輪。不同作品可在各自 entry 覆寫 holdMs 和 watchdogMs。不要把載入完成當作繪製完成；完成判定依各作品經檢查的 adapter。
 
 Recursive and Blocks 已跳過背景紋理繪製，保留底色和主要圖形。其原始函式仍保留便於之後修改。跳過這段也會省略原本亂數消耗，因此同 seed 與原網站紋理版不保證相同構圖。
 

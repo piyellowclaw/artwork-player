@@ -3,13 +3,13 @@ const test=require('node:test'),assert=require('node:assert/strict'),vm=require(
 const source=fs.readFileSync(path.join(__dirname,'../renderer.js'),'utf8');
 async function harness(overrides={}){
  let now=0,id=0;const timers=new Map(),frames=[],events={},starts=[];
- const config={repetitions:3,holdMs:10000,fadeMs:600,readyTimeoutMs:30000,watchdogMs:900000,artworks:[{id:'a',path:'a'},{id:'b',path:'b'}],...overrides};
+ const config={shuffle:false,repetitions:3,holdMs:10000,fadeMs:600,readyTimeoutMs:30000,watchdogMs:900000,artworks:[{id:'a',path:'a'},{id:'b',path:'b'}],...overrides};
  const status={classList:{toggle(){}},textContent:''};
  const document={body:{classList:{toggle(){}},prepend:f=>frames.unshift(f)},querySelector:()=>status,querySelectorAll:()=>frames,createElement:()=>{
   const frame={style:{opacity:'0'},setAttribute(){},remove(){const i=frames.indexOf(frame);if(i>=0)frames.splice(i,1);},contentWindow:{postMessage(m){starts.push({frame,m,frames:[...frames],time:now});}}};return frame;
  }};
  const window={addEventListener:(k,fn)=>events[k]=fn};
- vm.runInNewContext(source,{document,window,location:{href:'http://local/',origin:'http://local'},URL,crypto:{randomUUID:()=>String(++id)},fetch:async()=>({json:async()=>config}),console:{log(){}},setTimeout:(fn,ms)=>{const key=++id;timers.set(key,{fn,time:now+ms});return key;},clearTimeout:key=>timers.delete(key)});
+ vm.runInNewContext(source,{ArtworkPlaylist:require('../playlist'),document,window,location:{href:'http://local/',origin:'http://local'},URL,crypto:{randomUUID:()=>String(++id)},fetch:async()=>({json:async()=>config}),console:{log(){}},setTimeout:(fn,ms)=>{const key=++id;timers.set(key,{fn,time:now+ms});return key;},clearTimeout:key=>timers.delete(key)});
  const flush=async()=>{for(let n=0;n<12;n++)await Promise.resolve();};
  async function tick(ms=0){const target=now+ms;await flush();for(;;){const due=[...timers].filter(([,t])=>t.time<=target).sort((a,b)=>a[1].time-b[1].time)[0];if(!due)break;now=due[1].time;timers.delete(due[0]);due[1].fn();await flush();}now=target;await flush();}
  function message(frame,kind,extra={}){events.message({origin:'http://local',source:frame.contentWindow,data:{artworkPlayer:true,token:new URL(frame.src,'http://local').searchParams.get('run'),kind,...extra}});}

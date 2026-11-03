@@ -1,13 +1,14 @@
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
-const defaults = {repetitions:3,holdMs:10000,fadeMs:600,readyTimeoutMs:30000,watchdogMs:900000};
+const defaults = {shuffle:true,repetitions:3,holdMs:10000,fadeMs:600,readyTimeoutMs:30000,watchdogMs:900000};
 function loadConfig(root, override={}) {
  const raw=JSON.parse(fs.readFileSync(path.join(root,'artworks/manifest.json'),'utf8'));
  const artworks=Array.isArray(raw)?raw:raw.artworks;
  if(!Array.isArray(artworks)||!artworks.length) throw Error('Manifest must contain artworks');
  const config={...defaults,...(!Array.isArray(raw)&&raw.config||{}),...override};
- for(const key of Object.keys(defaults)) if(!Number.isFinite(config[key])||config[key]<(key==='repetitions'?1:0)) throw Error('Invalid '+key);
+ if(typeof config.shuffle!=='boolean')throw Error('Invalid shuffle');
+ for(const key of Object.keys(defaults).filter(key=>key!=='shuffle')) if(!Number.isFinite(config[key])||config[key]<(key==='repetitions'?1:0)) throw Error('Invalid '+key);
  config.repetitions=Math.floor(config.repetitions);
  const ids=new Set();
  config.artworks=artworks.map(a=>{

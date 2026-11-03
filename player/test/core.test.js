@@ -23,3 +23,5 @@ test('only audited analytics and Human Flow missing reference are removed',()=>{
  const source=`<script src="https://www.googletagmanager.com/gtag/js?id=G-D3VYKTX0TN"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){}; gtag('config', 'G-D3VYKTX0TN');</script><script src="colorSetting.js"></script><script src="unknown.js"></script>`;
  const output=prepareHtml(source,'artworks/2023-Human-Flow/index.html');assert.ok(!output.includes('googletagmanager'));assert.ok(!output.includes('dataLayer'));assert.ok(!output.includes('src="colorSetting.js"'));assert.ok(output.includes('src="unknown.js"'));assert.ok(prepareHtml(source,'artworks/2023-Zen-Pots/index.html').includes('src="colorSetting.js"'));
 });
+
+test('shuffle defaults true, supports false, rejects non-boolean',t=>{assert.equal(loadConfig(fixture(t,[art])).shuffle,true);assert.equal(loadConfig(fixture(t,{config:{shuffle:false},artworks:[art]})).shuffle,false);assert.throws(()=>loadConfig(fixture(t,{config:{shuffle:'true'},artworks:[art]})),/Invalid shuffle/);});

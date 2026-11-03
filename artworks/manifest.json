@@ -4,7 +4,8 @@
     "holdMs": 10000,
     "fadeMs": 600,
     "readyTimeoutMs": 30000,
-    "watchdogMs": 900000
+    "watchdogMs": 900000,
+    "shuffle": true
   },
   "artworks": [
     {

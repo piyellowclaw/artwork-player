@@ -25,7 +25,7 @@ npm start -- --display 0    # first listed display; exhibition ONLY when desired
 
 ```json
 {
-  "config": {"repetitions": 3, "holdMs": 10000, "fadeMs": 600,
+  "config": {"shuffle": true, "repetitions": 3, "holdMs": 10000, "fadeMs": 600,
              "readyTimeoutMs": 30000, "watchdogMs": 180000},
   "artworks": [
     {"id": "example", "title": "Example", "path": "artworks/example/index.html",
@@ -38,7 +38,7 @@ All **eight** imported artworks use the audited `setup` adapter: after original 
 
 Other completion adapters: `fxpreview` hooks window.fxpreview / $fx.preview; `noLoop` hooks p5.prototype.noLoop; `either` accepts either. **Choose after inspecting the specific artwork**: fxpreview often means an early preview, not drawing completion. Unspecified completion defaults to `manual` rather than guessing. `timeout` requires `durationMs` and is visibly labeled a configured duration, never a genuine completion signal. Per-art `holdMs` / `watchdogMs` / `completionDelayMs` override the defaults. A completion delay is useful only if an inspected source has a known short post-signal tail.
 
-The hold starts on the genuine accepted completion event, not loading or the first frame: default **completion + 10 seconds**. Default sequence is A1,A2,A3,B1,B2,B3,… looping; repetitions remain configurable.
+The hold starts on the genuine accepted completion event, not loading or the first frame: default **completion + 10 seconds**. Default order is a fresh Fisher–Yates shuffle bag per round: every artwork appears exactly once, retaining configurable three consecutive generations (e.g. C1,C2,C3,A1,A2,A3,…). All works are visited before reshuffling. With multiple works the next round never starts with the previous round's last work. Playlist RNG runs in the parent, independent of artwork RNG. Set config.shuffle=false for manifest order; default true. Manual skips/failures consume the scheduled generation rather than restarting a round; failures require operator skip, as before.
 
 ### Serial fade through black (not a crossfade)
 

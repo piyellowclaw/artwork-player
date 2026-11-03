@@ -1,10 +1,10 @@
 (() => {
  'use strict'; document.body.classList.toggle('exhibition',new URL(location.href).searchParams.get('exhibition')==='1');
- let config,current=null,pending=null,loading=null,queued=false,advancing=false,phase='idle',position={index:0,repeat:0},holdTimer;
+ let playlist,config,current=null,pending=null,loading=null,queued=false,advancing=false,phase='idle',position={index:0,repeat:0},holdTimer;
  const status=document.querySelector('#status');
  const say=(message,error=false)=>{status.textContent=message;status.classList.toggle('error',error);console.log('[player]',message);};
  const label=f=>(f.art.title||f.art.id)+' · '+(f.position.repeat+1)+'/'+config.repetitions;
- const next=p=>p.repeat+1<config.repetitions?{index:p.index,repeat:p.repeat+1}:{index:(p.index+1)%config.artworks.length,repeat:0};
+ const next=p=>playlist.next(p);
  const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
  function dispose(f){if(!f)return;clearTimeout(f.readyTimer);clearTimeout(f.activationTimer);clearTimeout(f.watchdog);f.iframe.remove();}
  function preload(p){
@@ -72,6 +72,6 @@
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();advance();}
   if(e.key==='Enter'&&current)finished(current,'manual confirmation');
  });
- window.playerState=()=>({current:current&&{id:current.art.id,repeat:current.position.repeat,done:current.done,started:!!current.started,failed:!!current.failed,token:current.token},pending:pending&&{id:pending.art.id,ready:pending.ready},phase,advancing,frames:document.querySelectorAll('iframe').length,status:status.textContent});
- fetch('/config.json').then(r=>r.json()).then(c=>{config=c;pending=preload(position);advance();}).catch(e=>say('Cannot start: '+e.message,true));
+ window.playerState=()=>({current:current&&{id:current.art.id,repeat:current.position.repeat,done:current.done,started:!!current.started,failed:!!current.failed,token:current.token,round:current.position.round,slot:current.position.slot},pending:pending&&{id:pending.art.id,ready:pending.ready},phase,advancing,frames:document.querySelectorAll('iframe').length,status:status.textContent});
+ fetch('/config.json').then(r=>r.json()).then(c=>{config=c;playlist=ArtworkPlaylist.createPlaylist(c.artworks.length,c.repetitions,{shuffle:c.shuffle!==false});position=playlist.initial();pending=preload(position);advance();}).catch(e=>say('Cannot start: '+e.message,true));
 })();
