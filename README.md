@@ -1,6 +1,6 @@
 # Offline Artwork Player (macOS)
 
-Node + Electron exhibition player. Each artwork remains an independently editable folder under `artworks/`. The player never writes artwork originals, changes random seeds, or patches source files on disk. The local server injects an **external** bridge into HTML responses and temporarily makes original script elements inert; only a start message at the crossfade boundary activates them in order. Hidden preloaded art therefore cannot finish before becoming visible. This adapter changes execution timing, not RNG algorithms.
+Node + Electron exhibition player. Each artwork remains an independently editable folder under `artworks/`. The player never writes artwork originals, changes random seeds, or patches source files on disk. The local server injects an **external** bridge into HTML responses and temporarily makes original script elements inert; only a start message after the outgoing document is removed activates them in order. Hidden preloaded art is inert. The incoming generation starts behind black and becomes visible after its first canvas paint, while generation continues in realtime. This adapter changes execution timing, not RNG algorithms.
 
 ## Install / launch
 
@@ -14,10 +14,10 @@ npm run smoke               # bounded launch check; windowed, closes after 15 se
 npx electron player/test/real-artworks.js # all 8 real artworks; screenshots + completion evidence
 npm run list-displays
 npm start -- --windowed     # safe editing preview
-npm start -- --display 123  # exhibition launch ONLY when desired
+npm start -- --display 0    # first listed display; exhibition ONLY when desired
 ```
 
-Without `--windowed`, the borderless window fills the selected display's **bounds** (not work area). An unavailable ID falls back to the first external display, then primary. This does not change macOS display configuration or open a fullscreen Space. Escape closes the app. Right arrow / Space skips a generation; Enter manually confirms completion. A new iframe/document generates a fresh artwork using its original RNG setup on each repetition.
+`npm run list-displays` prints zero-based **index**, OS ID and name. `--display 0` selects the first listed screen; `--display-index 1` is an alias selecting the second. Advanced compatibility: `--display-id OS_ID` selects an explicit OS ID. An invalid explicit selection fails rather than opening on another screen. Without a selection, the first external display is preferred, then primary. Without `--windowed`, the opaque, square-cornered, shadowless borderless window fills the selected display's **bounds** (not work area), without changing macOS display configuration or opening a fullscreen Space. Escape closes the app. Right arrow / Space skips a generation; Enter manually confirms completion. A new iframe/document generates a fresh artwork using its original RNG setup on each repetition.
 
 ## Manifest contract
 
@@ -38,7 +38,18 @@ All **eight** imported artworks use the audited `setup` adapter: after original 
 
 Other completion adapters: `fxpreview` hooks window.fxpreview / $fx.preview; `noLoop` hooks p5.prototype.noLoop; `either` accepts either. **Choose after inspecting the specific artwork**: fxpreview often means an early preview, not drawing completion. Unspecified completion defaults to `manual` rather than guessing. `timeout` requires `durationMs` and is visibly labeled a configured duration, never a genuine completion signal. Per-art `holdMs` / `watchdogMs` / `completionDelayMs` override the defaults. A completion delay is useful only if an inspected source has a known short post-signal tail.
 
-The hold starts on the accepted completion event, not iframe loading. Default sequence is A1,A2,A3,B1,B2,B3,… looping. Two iframes overlap for the fade; the old one is removed afterward, disposing its timers/graphics. Source-window + origin + unique generation-token checks discard stale frame messages. Ready timeout and watchdog are visible warnings; **neither silently counts as finished**. Use → to skip or Enter to confirm manually after inspecting the image.
+The hold starts on the genuine accepted completion event, not loading or the first frame: default **completion + 10 seconds**. Default sequence is A1,A2,A3,B1,B2,B3,… looping; repetitions remain configurable.
+
+### Serial fade through black (not a crossfade)
+
+1. Fade the outgoing artwork to black for `fadeMs` (default **600 ms**).
+2. Remove its iframe, stopping that generation **before** activating the next one. A second preloaded iframe may exist, but its original scripts remain inert.
+3. While black, await local-script readiness, execute incoming scripts in order, then await a genuine canvas submission and two animation-frame boundaries (or an explicit custom-renderer start signal).
+4. Fade in the incoming artwork for another `fadeMs` (**600 ms**). **Do not wait for generation to finish**: viewers see realtime drawing.
+
+Total fade time is 1.2 seconds by default, plus any readiness/activation delay behind black. Canvas observation covers connected 2D, WebGL and bitmap canvases; custom/non-canvas renderers must dispatch `window.dispatchEvent(new Event('artwork-player-started'))` when genuinely starting, not merely on document load. First paint/start readiness and completion are independent handshakes. A completion that arrives before fade-in still starts its hold, but cannot advance a retired generation or interrupt the serialized transition.
+
+`readyTimeoutMs` bounds each readiness and activation phase separately (default 30 seconds). Load/script/start errors or activation timeouts keep the display black and remove the failed generation; → / Space manually skips and recovers. These failures never count as completion. The completion watchdog warns without auto-finishing; Enter can confirm a healthy active generation manually. Source-window + origin + unique generation-token checks reject stale messages; retiring the outgoing frame immediately disables its completion/hold callbacks.
 
 ## Offline / safety
 
@@ -48,9 +59,9 @@ The bridge supports ordinary classic/module script artwork pages. Arbitrary docu
 
 ## Verification
 
-`npm test` exercises config validation, source-preserving injection, server confinement and repetition ordering. `npm run test:electron` opens a small isolated test window, checks hidden-preload suspension, completion-relative holding, stale messages, fxpreview/noLoop, repetition/next progression, frame cleanup, actual network denial, watchdog non-completion, and ready-timeout reporting. `npm run smoke` is a bounded real-manifest launch check, not proof that all eight artworks finished or that the external-display layout is correct. No automatic test takes over an external screen.
+`npm test` exercises config validation, source-preserving injection, server confinement and repetition ordering. `npm run test:electron` opens a small isolated test window, uses condition-based waits to check inert preload, serial removal-before-activation, black during delayed first paint, realtime visibility before completion, activation timeout/error blackouts, manual recovery, completion-relative holding, stale/retired messages, fxpreview/noLoop, three repetitions, network denial and watchdog/ready timeouts. Deterministic transition unit tests also cover early completion holds and cancellation. `npm run smoke` is a bounded real-manifest launch check, not proof that all eight artworks finished or that the external-display layout is correct. No automatic test takes over an external screen.
 
-`npx electron player/test/real-artworks.js` runs all eight actual artworks to genuine setup completion (15-minute bound per work), records network failures and canvas statistics, and saves screenshots in `audit/real-artworks/`. Latest evidence: **23/23 unit tests, Electron integration, and 8/8 real artworks passed**; all screenshots visually inspected, with no HTTP/network/rendering errors. See [audit/completion.md](audit/completion.md) for timings and limitations. External-display placement has not been automatically verified.
+`npx electron player/test/real-artworks.js` runs all eight actual artworks to genuine setup completion (15-minute bound per work), records network failures and canvas statistics, and saves screenshots in `audit/real-artworks/`. Latest evidence: **39/39 unit tests, Electron integration, and 8/8 real artworks passed**; all screenshots visually inspected, with no HTTP/network/rendering errors. See [audit/completion.md](audit/completion.md) for timings and limitations. External-display placement has not been automatically verified.
 
 Full eight-artwork verification: `npx electron player/test/real-artworks.js` (windowed; can take minutes). Chinese launch guide: [QUICKSTART.zh-TW.md](QUICKSTART.zh-TW.md). Third-party licenses and complete p5 source archives: [THIRD-PARTY.md](THIRD-PARTY.md).
 

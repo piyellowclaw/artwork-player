@@ -45,3 +45,11 @@ All eight: zero blocked requests, zero HTTP failures, zero network failures. Liv
 ## Independent review follow-up
 
 Reviewer found a retired-frame completion race during manual skip while the next iframe is not ready. Fixed by retiring current.active at advance initiation and binding hold callbacks to the exact active frame. A real Electron regression delays the next asset by 500ms, skips the outgoing generation before completion, then verifies the incoming manual generation remains active and unfinished. Final fixture integration passed. p5 licensing gate resolved with version-specific LGPL texts, readable distributions and complete tagged source archives; see THIRD-PARTY.md. README updated for eight setup-completion adapters.
+
+## 2026-11-04 follow-up: serial black fades and display index
+
+Crossfade superseded: outgoing now fades completely black and is removed before incoming activation. Inert preload remains allowed. Incoming stays opacity zero until scripts finish loading/evaluating, its canvas submits an actual draw, and two RAFs have elapsed; only then fades in. This is a generation-start gate, not generation completion. Actual canvas-method observation short-circuits after the first observed draw. Per-phase fadeMs remains 600ms by default; genuine completion still starts holdMs=10000. Error/ready/activation timeout stays black, visible error, manual skip recovery.
+
+39/39 unit tests, deterministic serial-transition regression tests, and actual windowed Electron pixel tests passed. All eight real artworks completed offline again with zero HTTP/network failures. Updated screenshots/results in real-artworks/. Artwork source verification still 51 unchanged, one authorized Recursive patch, one known upstream missing reference.
+
+Display selection: --display INDEX is now zero-based, --display-index is an alias; --display-id retains explicit OS-ID selection. list-displays includes index and ID. Invalid selection fails instead of targeting an unintended display. Exhibition native options explicitly frame=false, roundedCorners=false, hasShadow=false, transparent=false. Hidden native window test verifies hasShadow=false and outer bounds equal content bounds, without taking over the display. Physical compositor edge appearance on the user's exhibition monitor is not directly verified.

@@ -2,7 +2,7 @@
   {
     "id": "2023-Generative-Succulent",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:10.321Z",
+    "startedAt": "2026-11-03T18:18:28.451Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -13,19 +13,19 @@
       },
       {
         "level": "info",
-        "message": "[player] Generative Succulent · 1/1 · rendering"
+        "message": "[player] Generative Succulent · 1/1 · starting (black)"
       },
       {
         "level": "info",
-        "message": "ooq5enY5uiLPYCr1yCNpPGWQRzS5z1LrMGZHazzweP1rFR3isUw"
+        "message": "oovJ3D5aSgF1QDDRTHRzLrMqKRYSUgdAyqF9QVoqN69f1NGzdHd"
+      },
+      {
+        "level": "info",
+        "message": "[player] Generative Succulent · 1/1 · rendering"
       },
       {
         "level": "warning",
         "message": "An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing."
-      },
-      {
-        "level": "info",
-        "message": "round bowl?"
       },
       {
         "level": "info",
@@ -40,18 +40,21 @@
         "message": "[player] Generative Succulent · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 1831,
+    "elapsedMs": 1603,
     "state": {
       "current": {
         "id": "2023-Generative-Succulent",
         "repeat": 0,
         "done": true,
-        "token": "c33b8818-f466-4f51-92c6-7102e6f94eca"
+        "started": true,
+        "failed": false,
+        "token": "4910444c-fe2e-4738-8b67-49e0294d3551"
       },
       "pending": {
         "id": "2023-Generative-Succulent",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Generative Succulent · 1/1 · completed: setup"
@@ -59,13 +62,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 14,
+      "min": 0,
       "max": 255,
       "opaque": 454400,
-      "colors": 124954,
+      "colors": 142076,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "ooq5enY5uiLPYCr1yCNpPGWQRzS5z1LrMGZHazzweP1rFR3isUw"
+      "fxhash": "oovJ3D5aSgF1QDDRTHRzLrMqKRYSUgdAyqF9QVoqN69f1NGzdHd"
     },
     "screenshot": "audit/real-artworks/2023-Generative-Succulent.png",
     "pass": true
@@ -73,7 +76,7 @@
   {
     "id": "2023-Folding",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:12.330Z",
+    "startedAt": "2026-11-03T18:18:30.136Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -84,11 +87,15 @@
       },
       {
         "level": "info",
-        "message": "[player] Folding · 1/1 · rendering"
+        "message": "[player] Folding · 1/1 · starting (black)"
       },
       {
         "level": "info",
-        "message": "oosCMxvCtKeTnQSKDf4bKohuTB1XjDJyb2ZbT5mkLtj4kNW7wtU"
+        "message": "ooAn4gp31pZG8WiZAe8w2ybj8ggvpAs7Pz4KRH7i5Krv3yGB6Pt"
+      },
+      {
+        "level": "info",
+        "message": "[player] Folding · 1/1 · rendering"
       },
       {
         "level": "warning",
@@ -99,18 +106,21 @@
         "message": "[player] Folding · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 2076,
+    "elapsedMs": 785,
     "state": {
       "current": {
         "id": "2023-Folding",
         "repeat": 0,
         "done": true,
-        "token": "f439f728-481c-4e24-bdc1-03a804fafe73"
+        "started": true,
+        "failed": false,
+        "token": "b084f7c0-8b13-4652-acb5-5f5df96ad5ac"
       },
       "pending": {
         "id": "2023-Folding",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Folding · 1/1 · completed: setup"
@@ -118,13 +128,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 0,
+      "min": 1,
       "max": 255,
       "opaque": 454400,
-      "colors": 171379,
+      "colors": 167478,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "oosCMxvCtKeTnQSKDf4bKohuTB1XjDJyb2ZbT5mkLtj4kNW7wtU"
+      "fxhash": "ooAn4gp31pZG8WiZAe8w2ybj8ggvpAs7Pz4KRH7i5Krv3yGB6Pt"
     },
     "screenshot": "audit/real-artworks/2023-Folding.png",
     "pass": true
@@ -132,7 +142,7 @@
   {
     "id": "2023-Human-Flow",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:14.469Z",
+    "startedAt": "2026-11-03T18:18:30.994Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -143,11 +153,15 @@
       },
       {
         "level": "info",
-        "message": "[player] Human Flow · 1/1 · rendering"
+        "message": "[player] Human Flow · 1/1 · starting (black)"
       },
       {
         "level": "info",
-        "message": "ooeDcvh52c9FEu4cC6mSD3y1JSwYWpMk8pEnFjzrP3Gxw3NBbym"
+        "message": "oo7TucS1qt9FaGqLarqxHzFqaukteU33k8SiiZMLCRmczgZ8dNL"
+      },
+      {
+        "level": "info",
+        "message": "[player] Human Flow · 1/1 · rendering"
       },
       {
         "level": "warning",
@@ -158,18 +172,21 @@
         "message": "[player] Human Flow · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 11654,
+    "elapsedMs": 7490,
     "state": {
       "current": {
         "id": "2023-Human-Flow",
         "repeat": 0,
         "done": true,
-        "token": "1d17151d-09bf-410f-9cb5-1dc6e76d4a4f"
+        "started": true,
+        "failed": false,
+        "token": "d5639452-4131-472b-8733-ae7a1d1d1cc1"
       },
       "pending": {
         "id": "2023-Human-Flow",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Human Flow · 1/1 · completed: setup"
@@ -177,13 +194,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 3,
+      "min": 4,
       "max": 255,
       "opaque": 454400,
-      "colors": 166025,
+      "colors": 129879,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "ooeDcvh52c9FEu4cC6mSD3y1JSwYWpMk8pEnFjzrP3Gxw3NBbym"
+      "fxhash": "oo7TucS1qt9FaGqLarqxHzFqaukteU33k8SiiZMLCRmczgZ8dNL"
     },
     "screenshot": "audit/real-artworks/2023-Human-Flow.png",
     "pass": true
@@ -191,7 +208,7 @@
   {
     "id": "2023-Refractions",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:26.178Z",
+    "startedAt": "2026-11-03T18:18:38.538Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -199,6 +216,10 @@
       {
         "level": "warning",
         "message": "An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing."
+      },
+      {
+        "level": "info",
+        "message": "[player] Refractions · 1/1 · starting (black)"
       },
       {
         "level": "info",
@@ -213,18 +234,21 @@
         "message": "[player] Refractions · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 16292,
+    "elapsedMs": 16760,
     "state": {
       "current": {
         "id": "2023-Refractions",
         "repeat": 0,
         "done": true,
-        "token": "f5077706-a878-47e4-841f-f5cb2e75c42a"
+        "started": true,
+        "failed": false,
+        "token": "54d4f45a-c520-42a8-896c-d6bdc127ef55"
       },
       "pending": {
         "id": "2023-Refractions",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Refractions · 1/1 · completed: setup"
@@ -232,13 +256,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 9,
+      "min": 20,
       "max": 255,
       "opaque": 454400,
-      "colors": 135213,
+      "colors": 112931,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "oo4WjFWfgqXBQTVxNua7JmbqQNkSpdbtsgKPQt6HL9KMjhxTaHo"
+      "fxhash": "ooPeCNgBYupsB1B4iScJxSZyXjNrf3yKuMRzUV6NsdkKVe2P9ji"
     },
     "screenshot": "audit/real-artworks/2023-Refractions.png",
     "pass": true
@@ -246,7 +270,7 @@
   {
     "id": "2023-Sketching-Clouds",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:42.547Z",
+    "startedAt": "2026-11-03T18:18:55.357Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -254,6 +278,10 @@
       {
         "level": "warning",
         "message": "An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing."
+      },
+      {
+        "level": "info",
+        "message": "[player] Sketching Clouds · 1/1 · starting (black)"
       },
       {
         "level": "info",
@@ -268,18 +296,21 @@
         "message": "[player] Sketching Clouds · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 14216,
+    "elapsedMs": 20887,
     "state": {
       "current": {
         "id": "2023-Sketching-Clouds",
         "repeat": 0,
         "done": true,
-        "token": "6d05cbaf-4692-4b26-bf87-39c3fff2ec7f"
+        "started": true,
+        "failed": false,
+        "token": "47acbe71-b9ac-4316-a27a-8b2273b16011"
       },
       "pending": {
         "id": "2023-Sketching-Clouds",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Sketching Clouds · 1/1 · completed: setup"
@@ -290,10 +321,10 @@
       "min": 15,
       "max": 255,
       "opaque": 454400,
-      "colors": 1556,
+      "colors": 1400,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "oodrdGJKtGA6qoPvpgxKKwVErBSxTBPszr8PFpbBQzTGUn4AU4D"
+      "fxhash": "ooPdq8H9K5hCgMGzWz7GM5zxhJjcMA3a32pCHD1aYxn26gRmfh7"
     },
     "screenshot": "audit/real-artworks/2023-Sketching-Clouds.png",
     "pass": true
@@ -301,7 +332,7 @@
   {
     "id": "2023-Wire-City",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:56.822Z",
+    "startedAt": "2026-11-03T18:19:16.278Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -309,6 +340,10 @@
       {
         "level": "warning",
         "message": "An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing."
+      },
+      {
+        "level": "info",
+        "message": "[player] Wire City · 1/1 · starting (black)"
       },
       {
         "level": "info",
@@ -323,18 +358,21 @@
         "message": "[player] Wire City · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 1030,
+    "elapsedMs": 1292,
     "state": {
       "current": {
         "id": "2023-Wire-City",
         "repeat": 0,
         "done": true,
-        "token": "c6cc8480-746e-4fe3-8853-ea33bcf50ed3"
+        "started": true,
+        "failed": false,
+        "token": "4285a7a2-8966-40b6-bbdc-77add1461415"
       },
       "pending": {
         "id": "2023-Wire-City",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Wire City · 1/1 · completed: setup"
@@ -345,10 +383,10 @@
       "min": 0,
       "max": 255,
       "opaque": 454400,
-      "colors": 187112,
+      "colors": 162695,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "ooMvRrTvXiuRXiWMSYioc7yksqx4R4q1kxf2WMrmdTxoXbTAMB2"
+      "fxhash": "oou2ux6zDTmLKnMomtEHw5HLnNYWeuHWCh1ZukmxFzsJcCnkBMd"
     },
     "screenshot": "audit/real-artworks/2023-Wire-City.png",
     "pass": true
@@ -356,7 +394,7 @@
   {
     "id": "2023-Zen-Pots",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:38:57.938Z",
+    "startedAt": "2026-11-03T18:19:17.641Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -364,6 +402,10 @@
       {
         "level": "warning",
         "message": "An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing."
+      },
+      {
+        "level": "info",
+        "message": "[player] Zen Pots · 1/1 · starting (black)"
       },
       {
         "level": "info",
@@ -378,18 +420,21 @@
         "message": "[player] Zen Pots · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 8553,
+    "elapsedMs": 7236,
     "state": {
       "current": {
         "id": "2023-Zen-Pots",
         "repeat": 0,
         "done": true,
-        "token": "0e321680-89b9-45ec-99ca-20318b943ca6"
+        "started": true,
+        "failed": false,
+        "token": "2b87f51d-9540-4450-b217-66913709183f"
       },
       "pending": {
         "id": "2023-Zen-Pots",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Zen Pots · 1/1 · completed: setup"
@@ -397,13 +442,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 51,
+      "min": 0,
       "max": 255,
       "opaque": 454400,
-      "colors": 2742,
+      "colors": 2730,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "ooMuFm85M2Ewq6J2quJBSjYa92WpJQyRkXcaS3EkYHZvfpGpabn"
+      "fxhash": "ooT5bPrtxDj3no55f49ycp8aoR9w3gaWvuQHVCXBy3G981PKboP"
     },
     "screenshot": "audit/real-artworks/2023-Zen-Pots.png",
     "pass": true
@@ -411,7 +456,7 @@
   {
     "id": "2022-Recursive-and-Blocks",
     "completion": "setup",
-    "startedAt": "2026-11-03T17:39:06.541Z",
+    "startedAt": "2026-11-03T18:19:24.926Z",
     "blocked": [],
     "httpFailures": [],
     "networkFailures": [],
@@ -422,11 +467,11 @@
       },
       {
         "level": "info",
-        "message": "[player] Recursive and Blocks · 1/1 · rendering"
+        "message": "[player] Recursive and Blocks · 1/1 · starting (black)"
       },
       {
         "level": "info",
-        "message": "oo67vsJuPxJCSNPBi8mrEe2v8b5EFTy7jQULVByYh7tgdwhcPLV"
+        "message": "ooxT1e5vHnruS1K4yhHWjSYDYyrhLs9WKXAt132XS8RvzVtX4aa"
       },
       {
         "level": "info",
@@ -438,15 +483,19 @@
       },
       {
         "level": "info",
-        "message": "hue:114.25762734375894"
+        "message": "hue:319.10813100636005"
       },
       {
         "level": "info",
-        "message": "sat:51.84270242229104 bright:78.69089713320136"
+        "message": "sat:72.41926322691143 bright:52.275252090767026"
       },
       {
         "level": "info",
-        "message": "amount: 2,1"
+        "message": "amount: 1,2"
+      },
+      {
+        "level": "info",
+        "message": "[player] Recursive and Blocks · 1/1 · rendering"
       },
       {
         "level": "warning",
@@ -461,18 +510,21 @@
         "message": "[player] Recursive and Blocks · 1/1 · completed: setup"
       }
     ],
-    "elapsedMs": 4385,
+    "elapsedMs": 6470,
     "state": {
       "current": {
         "id": "2022-Recursive-and-Blocks",
         "repeat": 0,
         "done": true,
-        "token": "719213d6-7afa-4377-bc80-6e029720cdb7"
+        "started": true,
+        "failed": false,
+        "token": "3561dc0b-4ad1-4a0f-9a81-e771542d2f85"
       },
       "pending": {
         "id": "2022-Recursive-and-Blocks",
         "ready": true
       },
+      "phase": "idle",
       "advancing": false,
       "frames": 2,
       "status": "Recursive and Blocks · 1/1 · completed: setup"
@@ -480,13 +532,13 @@
     "canvas": {
       "width": 800,
       "height": 568,
-      "min": 26,
+      "min": 7,
       "max": 255,
       "opaque": 454400,
-      "colors": 58172,
+      "colors": 60460,
       "setupType": "function",
       "fxrandType": "function",
-      "fxhash": "oo67vsJuPxJCSNPBi8mrEe2v8b5EFTy7jQULVByYh7tgdwhcPLV"
+      "fxhash": "ooxT1e5vHnruS1K4yhHWjSYDYyrhLs9WKXAt132XS8RvzVtX4aa"
     },
     "screenshot": "audit/real-artworks/2022-Recursive-and-Blocks.png",
     "pass": true

@@ -8,13 +8,13 @@ npm run list-displays
 npm start -- --windowed
 ~~~
 
-確認視窗預覽正常後，離開預覽，再用 list-displays 顯示的螢幕 ID 啟動：
+確認視窗預覽正常後，離開預覽，再用 list-displays 顯示的螢幕 index 啟動（從 0 開始）：
 
 ~~~sh
-npm start -- --display 2
+npm start -- --display 0
 ~~~
 
-上面的 2 只是範例；請以你的螢幕 ID 為準。不指定時優先使用外接螢幕，沒有外接時使用主螢幕。正式播放為無邊框、涵蓋螢幕 bounds，不改動 macOS 的延伸螢幕設定。
+0 是清單中的第一個螢幕，1 是第二個；清單也會列出 OS ID 和名稱。`--display-index 1` 是 index 選法的別名；相容舊系統 ID 可用 `--display-id OS_ID`。指定不存在的 index／ID 會報錯，不會偷偷換螢幕。不指定時優先使用外接螢幕，沒有外接時使用主螢幕。正式播放為不透明、直角、無陰影的無邊框視窗，涵蓋螢幕 bounds，不改動 macOS 的延伸螢幕設定。
 
 - Escape：離開
 - →／空白鍵：跳過目前這次生成
@@ -32,8 +32,12 @@ npm start -- --display 2
 
 - repetitions：同件作品連續生成次數
 - holdMs：作品真正完成生成後，停留多久才切換
-- fadeMs：雙 iframe 交叉淡化的時間
+- fadeMs：每個淡出／淡入階段的時間（預設各 600ms，合計 1.2 秒，另加黑畫面等待載入／開始的時間）
 - watchdogMs：生成過久時的提醒，並不假裝完成或自動跳過
+
+切換採「淡出到黑 → 移除舊作品 → 黑畫面下載入並啟動新作品 → 確認第一個 canvas 繪製畫格後淡入」，不會兩件作品同時生成。預載 iframe 的原始腳本保持暫停。**不會等整件生成完才淡入**，觀眾仍會看到即時生成過程；真正生成完成後才開始計算預設 10 秒停留。
+
+載入與啟動各受 readyTimeoutMs 限制（預設各 30 秒）。腳本錯誤、啟動失敗或逾時維持黑畫面並顯示錯誤，按 →／空白鍵可跳過恢復；錯誤不會當作完成。非 canvas 的自訂作品需在真正開始繪製時發送 artwork-player-started window event，不能用 load 假裝開始。
 
 作品清單的順序就是輪播順序；跑完後回到第一件。不同作品可在各自 entry 覆寫 holdMs 和 watchdogMs。不要把載入完成當作繪製完成；完成判定依各作品經檢查的 adapter。
 
