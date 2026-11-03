@@ -1,0 +1,60 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Refractions/",
+  "importedAt": "2026-11-03T17:32:15.460Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 22290,
+      "sha256": "20621e91582eca06458c13d0f4a7c4a33c92d5f2375c09b3f6cf0f0293b4ccb8",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 823171,
+      "sha256": "fbf1485eb7690e97c35d7525f8c67718109654d96c233e9d2cbb65ab4b8626f7",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 9995,
+      "sha256": "9e76c26e1c3767eac117907deb0675d0b3b28f515e572c9680555743b621e23b",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/sketch.js"
+    },
+    {
+      "path": "drawer.js",
+      "bytes": 635,
+      "sha256": "205d0e0ea7de5706b7e651c8be8727bbd0ffef26afa7efe7dd8b75f346f6fda1",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/drawer.js"
+    },
+    {
+      "path": "easings.js",
+      "bytes": 3736,
+      "sha256": "7e2670d053de047300f343b8ebd3af07b265031fb5ee665f5a9c0978da7d99c2",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/easings.js"
+    },
+    {
+      "path": "helper.js",
+      "bytes": 10057,
+      "sha256": "d24fb6864c0b028c920c13961c908184e68a17c1685bb207f491e17750ac2836",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/helper.js"
+    },
+    {
+      "path": "divider.js",
+      "bytes": 1279,
+      "sha256": "6fec74840a260730fe765174d450ff321597ffef76d8e5188198bfc93bd79ffc",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/divider.js"
+    },
+    {
+      "path": "object.js",
+      "bytes": 5366,
+      "sha256": "eaa1eca7636f1e2dc71fc17f9423c21ef9d438cd63c66ec61fd581b6fab23c8f",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/object.js"
+    },
+    {
+      "path": "colorSetting.js",
+      "bytes": 3433,
+      "sha256": "d728dd9554acf38ef956872994730fce1e5ef9cc15186b6e44131f2380a2dc79",
+      "url": "https://sketch.newyellow.xyz/2023-Refractions/colorSetting.js"
+    }
+  ]
+}

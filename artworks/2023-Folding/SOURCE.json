@@ -1,0 +1,36 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Folding/",
+  "importedAt": "2026-11-03T17:32:13.565Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 13681,
+      "sha256": "0e36984496f7615a4cf5412f781c98e3ecac545e44bd5f30a80e385fdd7b0a37",
+      "url": "https://sketch.newyellow.xyz/2023-Folding/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 898365,
+      "sha256": "15365a01a2c17643af1a632f6404b88e435bcecf2cce4b70e5624a95a6d13d33",
+      "url": "https://sketch.newyellow.xyz/2023-Folding/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 7951,
+      "sha256": "66347e8d0a409462baa9d2330a858d0472a025a3bbba091a30d9b1dcce59846a",
+      "url": "https://sketch.newyellow.xyz/2023-Folding/sketch.js"
+    },
+    {
+      "path": "card.js",
+      "bytes": 10492,
+      "sha256": "472823331b599441dcd4909aba7d4ec0fd1c76e12fb1d925fac4fca8e974b2d1",
+      "url": "https://sketch.newyellow.xyz/2023-Folding/card.js"
+    },
+    {
+      "path": "draw-methods.js",
+      "bytes": 7229,
+      "sha256": "7ea6a3e148ed26be2a5fdb75a263246cc97721f37b3f5bb88c40da895c502db4",
+      "url": "https://sketch.newyellow.xyz/2023-Folding/draw-methods.js"
+    }
+  ]
+}

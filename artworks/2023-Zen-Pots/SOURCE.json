@@ -1,0 +1,60 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Zen-Pots/",
+  "importedAt": "2026-11-03T17:32:17.763Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 22292,
+      "sha256": "1c320c169ba98769ae77b9029edaf09b251fbf3331474ce759ed6c6fc470c986",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 823171,
+      "sha256": "fbf1485eb7690e97c35d7525f8c67718109654d96c233e9d2cbb65ab4b8626f7",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 2054,
+      "sha256": "3cf0b2025ad6aae1ce0ddcd6c165ff2f91cd4a0d852a736d92f08cefe6b56d93",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/sketch.js"
+    },
+    {
+      "path": "drawer.js",
+      "bytes": 9986,
+      "sha256": "dc442e97b0973d4760710764a038b17f849ee590986fe4f3221e9611fb8d2333",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/drawer.js"
+    },
+    {
+      "path": "easings.js",
+      "bytes": 4096,
+      "sha256": "4ef6f77bf2667a4409761c3c6c03277834e315c1234da85a628853b058661260",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/easings.js"
+    },
+    {
+      "path": "helper.js",
+      "bytes": 5023,
+      "sha256": "14e622d72d51ad2adda7cd4d959a807aa8bae250023e6abbef32c1867470508e",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/helper.js"
+    },
+    {
+      "path": "divider.js",
+      "bytes": 1387,
+      "sha256": "3fc6e7ca3ae9e2e45b5a384e81eb655c285e0eab075660ca75f272e98e0368c5",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/divider.js"
+    },
+    {
+      "path": "object.js",
+      "bytes": 1698,
+      "sha256": "2d76da08155ded8a6459516e4b291388b10841758a84b62fcb06343fb849a854",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/object.js"
+    },
+    {
+      "path": "colorSetting.js",
+      "bytes": 2052,
+      "sha256": "e616e0a0189bc5d9b6d666c2cee351a225a3f97847e7ed688f0aa28a82431afc",
+      "url": "https://sketch.newyellow.xyz/2023-Zen-Pots/colorSetting.js"
+    }
+  ]
+}

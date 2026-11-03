@@ -1,0 +1,55 @@
+'use strict';
+// Isolated test artworks live only in a temporary directory. Never mutates imported art.
+const {app,BrowserWindow,session}=require('electron'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),assert=require('node:assert/strict');
+const {createServer}=require('../server');
+const {isAllowedRequest}=require('../security');
+let server,root,win;const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+app.whenReady().then(async()=>{
+ root=fs.mkdtempSync(path.join(os.tmpdir(),'art-player-electron-'));fs.cpSync(path.resolve(__dirname,'..'),root+'/player',{recursive:true});fs.mkdirSync(root+'/artworks');
+ fs.writeFileSync(root+'/artworks/fx.html','<!doctype html><html><body><script>window.executed=true;function fxpreview(){};setTimeout(()=>fxpreview(),80)</script></body></html>');
+ fs.writeFileSync(root+'/artworks/p5.html','<!doctype html><html><body><script>window.executed=true;window.p5=function(){};p5.prototype.noLoop=function(){};setTimeout(()=>new p5().noLoop(),80)</script></body></html>');
+ const config={repetitions:3,holdMs:250,fadeMs:60,readyTimeoutMs:2000,watchdogMs:2000,artworks:[{id:'fx',path:'artworks/fx.html',completion:'fxpreview'},{id:'p5',path:'artworks/p5.html',completion:'noLoop'}]};
+ server=createServer(root,config);await new Promise(r=>server.listen(0,'127.0.0.1',r));const origin='http://127.0.0.1:'+server.address().port;
+ win=new BrowserWindow({width:640,height:480,show:true,webPreferences:{nodeIntegration:false,contextIsolation:true,sandbox:true,backgroundThrottling:false}});
+ win.webContents.session.webRequest.onBeforeRequest((d,cb)=>cb({cancel:!isAllowedRequest(d.url,origin)}));
+ win.webContents.on('console-message',e=>console.log('RENDERER',e.message));
+ await win.loadURL(origin);await sleep(210);
+ let state=await win.webContents.executeJavaScript('playerState()');assert.equal(state.current.id,'fx');assert.equal(state.current.done,true);assert.equal(state.frames,2);
+ const preload=await win.webContents.executeJavaScript('[...document.querySelectorAll("iframe")].filter(f=>f.style.opacity!=="1").map(f=>({executed:f.contentWindow.executed,ready:f.contentDocument.readyState}))');assert.equal(preload.length,1);assert.equal(preload[0].executed,undefined);console.log('PASS hidden preload does not execute');
+ const token=state.current.token;
+ await win.webContents.executeJavaScript('window.postMessage({artworkPlayer:true,token:"stale",kind:"complete",source:"fxpreview"},location.origin)');
+ await sleep(60);assert.equal((await win.webContents.executeJavaScript('playerState()')).current.token,token);console.log('PASS completion-relative hold and stale message rejection');
+ await sleep(1100);state=await win.webContents.executeJavaScript('playerState()');assert.equal(state.current.id,'p5');assert.ok(state.frames<=2);console.log('PASS three repetitions, next artwork, noLoop, old-frame cleanup',JSON.stringify(state));
+ // Exercise keyboard skip and watchdog without masquerading as completion.
+ await win.webContents.executeJavaScript('window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"}))');await sleep(100);
+ assert.ok((await win.webContents.executeJavaScript('playerState()')).current.token!==state.current.token);console.log('PASS keyboard next');
+ const blocked=await win.webContents.executeJavaScript('document.querySelector("iframe").contentWindow.fetch("https://example.com/offline-test").then(()=>false).catch(()=>true)');assert.equal(blocked,true);console.log('PASS actual offline network denial');
+
+ fs.writeFileSync(root+'/artworks/race-a.html','<!doctype html><body><script>function fxpreview(){};setTimeout(()=>fxpreview(),220)</script>');
+ fs.writeFileSync(root+'/artworks/race-b.html','<!doctype html><body><script src="slow.js"></script>');
+ fs.writeFileSync(root+'/artworks/slow.js','window.raceBStarted=true;');
+ const request=server.listeners('request')[0];server.removeAllListeners('request');
+ server.on('request',(req,res)=>req.url.includes('/slow.js')?setTimeout(()=>request(req,res),500):request(req,res));
+ config.artworks=[{id:'race-a',path:'artworks/race-a.html',completion:'fxpreview'},{id:'race-b',path:'artworks/race-b.html',completion:'manual'}];
+ config.repetitions=1;config.holdMs=100;config.readyTimeoutMs=2000;config.watchdogMs=4000;
+ await win.loadURL(origin);await sleep(110);
+ await win.webContents.executeJavaScript('window.dispatchEvent(new KeyboardEvent("keydown",{key:"ArrowRight"}))');
+ await sleep(1150);state=await win.webContents.executeJavaScript('playerState()');
+ assert.equal(state.current.id,'race-b');assert.equal(state.current.done,false);const raceToken=state.current.token;
+ await sleep(220);assert.equal((await win.webContents.executeJavaScript('playerState()')).current.token,raceToken);
+ console.log('PASS retired outgoing completion cannot skip delayed-ready incoming generation');
+ fs.writeFileSync(root+'/artworks/manual.html','<!doctype html><body><script>window.executed=true</script></body>');
+ config.artworks=[{id:'manual',path:'artworks/manual.html',completion:'manual'}];config.watchdogMs=120;config.holdMs=80;
+ await win.loadURL(origin);await sleep(280);state=await win.webContents.executeJavaScript('playerState()');assert.equal(state.current.done,false);assert.ok(state.status.includes('WATCHDOG'));const watchdogToken=state.current.token;
+ await sleep(160);assert.equal((await win.webContents.executeJavaScript('playerState()')).current.token,watchdogToken);console.log('PASS watchdog is visible and never auto-finishes');
+ config.artworks=[{id:'missing',path:'artworks/missing.html',completion:'manual'}];config.readyTimeoutMs=120;
+ await win.loadURL(origin);await sleep(220);state=await win.webContents.executeJavaScript('playerState()');assert.equal(state.current,null);assert.ok(state.status.includes('READY TIMEOUT'));assert.ok(state.frames<=1);console.log('PASS ready timeout is visible and cleans failed frame');
+ fs.writeFileSync(root+'/artworks/setup.html','<!doctype html><body><script>var fxrand=()=>0.25;let seeded=fxrand();async function setup(){await new Promise(r=>setTimeout(r,160));window.finalDraw=true;}window.addEventListener("load",()=>setup());</script></body>');
+ config.artworks=[{id:'setup',path:'artworks/setup.html',completion:'setup'}];config.readyTimeoutMs=2000;config.watchdogMs=2000;config.holdMs=1000;
+ await win.loadURL(origin);await sleep(90);assert.equal((await win.webContents.executeJavaScript('playerState()')).current.done,false);
+ await sleep(220);assert.equal((await win.webContents.executeJavaScript('playerState()')).current.done,true);
+ assert.equal(await win.webContents.executeJavaScript('[...document.querySelectorAll("iframe")].find(f=>f.style.opacity==="1").contentWindow.finalDraw'),true);console.log('PASS setup awaits promise and final paint');
+ fs.writeFileSync(root+'/artworks/reject.html','<!doctype html><body><script>async function setup(){throw Error("intentional failure");}window.addEventListener("load",()=>setup());</script></body>');
+ config.artworks=[{id:'reject',path:'artworks/reject.html',completion:'setup'}];await win.loadURL(origin);await sleep(160);state=await win.webContents.executeJavaScript('playerState()');assert.equal(state.current.done,false);assert.ok(state.status.includes('error:'));console.log('PASS rejected setup never completes');
+ console.log('ELECTRON_INTEGRATION_PASS');
+}).catch(e=>{console.error(e);process.exitCode=1;}).finally(()=>{if(win)win.close();if(server)server.close();if(root)fs.rmSync(root,{recursive:true,force:true});app.quit();});

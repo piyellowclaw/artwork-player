@@ -1,0 +1,59 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Human-Flow/",
+  "importedAt": "2026-11-03T17:32:14.561Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 22289,
+      "sha256": "16cdf4082bd5d917467ff7132a60e77a7229dfb319e9d719ff47fb47195077f6",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 823171,
+      "sha256": "fbf1485eb7690e97c35d7525f8c67718109654d96c233e9d2cbb65ab4b8626f7",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 14262,
+      "sha256": "6cea669d464f135f0bf91952cf11112d2553881578b9bffdb60bed399a4c25bc",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/sketch.js"
+    },
+    {
+      "path": "drawer.js",
+      "bytes": 1794,
+      "sha256": "7006a397fd5b60a2e4b73b49ea7b2049302428c1ec9f2aaaad4c1e38123e7432",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/drawer.js"
+    },
+    {
+      "path": "easings.js",
+      "bytes": 3736,
+      "sha256": "7e2670d053de047300f343b8ebd3af07b265031fb5ee665f5a9c0978da7d99c2",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/easings.js"
+    },
+    {
+      "path": "helper.js",
+      "bytes": 2019,
+      "sha256": "10d84ff8bd06a1a8aa72a16fc582c4cd5182b00e7b98e0d2922dec2582bdcb44",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/helper.js"
+    },
+    {
+      "path": "divider.js",
+      "bytes": 1133,
+      "sha256": "82e1c78860a87d5c8a0b3324637bd975c45c9f987b7e055cae8d2a73b6bb8907",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/divider.js"
+    },
+    {
+      "path": "object.js",
+      "bytes": 5895,
+      "sha256": "561ee46f5cb7150eda9353f59ab44e471f18c2af29e310be6b3aca33d9e801fa",
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/object.js"
+    },
+    {
+      "path": "colorSetting.js",
+      "status": 404,
+      "url": "https://sketch.newyellow.xyz/2023-Human-Flow/colorSetting.js"
+    }
+  ]
+}

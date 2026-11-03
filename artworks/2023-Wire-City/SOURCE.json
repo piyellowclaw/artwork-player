@@ -1,0 +1,36 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Wire-City/",
+  "importedAt": "2026-11-03T17:32:16.663Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 13688,
+      "sha256": "abd763886fbd81664a5b0bc94a4f7abb0a50603d70692e3fd1e9e5fc50cc0308",
+      "url": "https://sketch.newyellow.xyz/2023-Wire-City/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 898365,
+      "sha256": "15365a01a2c17643af1a632f6404b88e435bcecf2cce4b70e5624a95a6d13d33",
+      "url": "https://sketch.newyellow.xyz/2023-Wire-City/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 7816,
+      "sha256": "93508cfe22900cce3a41e59acc1649527a655b84b831aa116e23679ab69c61c9",
+      "url": "https://sketch.newyellow.xyz/2023-Wire-City/sketch.js"
+    },
+    {
+      "path": "nynode.js",
+      "bytes": 3064,
+      "sha256": "72b5d7a6e4c3fdfef7286cde4e559e07f79a4f6a3dc5409300f0c28030041aef",
+      "url": "https://sketch.newyellow.xyz/2023-Wire-City/nynode.js"
+    },
+    {
+      "path": "drawMethod.js",
+      "bytes": 15260,
+      "sha256": "14668be543ddb0a6e67bed004fb927926544c0b525e7a2b37f56f8d232151e13",
+      "url": "https://sketch.newyellow.xyz/2023-Wire-City/drawMethod.js"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+audit/screenshots/
+audit/*-results.json
+TASK.md
+player/RESUME.md

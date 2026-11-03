@@ -1,0 +1,59 @@
+{
+  "config": {
+    "repetitions": 3,
+    "holdMs": 10000,
+    "fadeMs": 600,
+    "readyTimeoutMs": 30000,
+    "watchdogMs": 900000
+  },
+  "artworks": [
+    {
+      "id": "2023-Generative-Succulent",
+      "title": "Generative Succulent",
+      "path": "artworks/2023-Generative-Succulent/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Folding",
+      "title": "Folding",
+      "path": "artworks/2023-Folding/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Human-Flow",
+      "title": "Human Flow",
+      "path": "artworks/2023-Human-Flow/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Refractions",
+      "title": "Refractions",
+      "path": "artworks/2023-Refractions/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Sketching-Clouds",
+      "title": "Sketching Clouds",
+      "path": "artworks/2023-Sketching-Clouds/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Wire-City",
+      "title": "Wire City",
+      "path": "artworks/2023-Wire-City/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2023-Zen-Pots",
+      "title": "Zen Pots",
+      "path": "artworks/2023-Zen-Pots/index.html",
+      "completion": "setup"
+    },
+    {
+      "id": "2022-Recursive-and-Blocks",
+      "title": "Recursive and Blocks",
+      "path": "artworks/2022-Recursive-and-Blocks/index.html",
+      "completion": "setup"
+    }
+  ]
+}

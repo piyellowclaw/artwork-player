@@ -1,0 +1,54 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Generative-Succulent/",
+  "importedAt": "2026-11-03T17:32:12.865Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 2793,
+      "sha256": "270cd0b8941299d6794272d60e3e1afc732deda60882e8635d6a0552483a7baf",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 823171,
+      "sha256": "fbf1485eb7690e97c35d7525f8c67718109654d96c233e9d2cbb65ab4b8626f7",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 6418,
+      "sha256": "e29e44815ce5bef0739a39d4905fe30b321db27480ad280e49e0b87e28b3eaf1",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/sketch.js"
+    },
+    {
+      "path": "perspective-rect.js",
+      "bytes": 2868,
+      "sha256": "61491a511fcdfa5d1e4960a0d8a4a4a33e3b7126eb568f62156f0bb26e8c87b6",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/perspective-rect.js"
+    },
+    {
+      "path": "easings.js",
+      "bytes": 3732,
+      "sha256": "b025a3a1ca4b9e8194cd8a0a27919f8caad36bfa02ebdc74813f987716c3d731",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/easings.js"
+    },
+    {
+      "path": "plantObj.js",
+      "bytes": 8636,
+      "sha256": "207f35ac048151137e803abe7f055ba12915f4241a948585f468c3bdf26e6357",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/plantObj.js"
+    },
+    {
+      "path": "NY-p5js-helper.js",
+      "bytes": 1941,
+      "sha256": "838b9b552f0b62cf9ce6b5deb37fd2bf47a5f9de79ae48eeab1e301f52deff4d",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/NY-p5js-helper.js"
+    },
+    {
+      "path": "draw.js",
+      "bytes": 8225,
+      "sha256": "492a5fe3285889b3a255171f129ab6fe50e52a00024d6e7179679a99345ef78c",
+      "url": "https://sketch.newyellow.xyz/2023-Generative-Succulent/draw.js"
+    }
+  ]
+}

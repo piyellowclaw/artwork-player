@@ -1,0 +1,19 @@
+{
+  "name": "artwork-player",
+  "version": "1.0.0",
+  "private": true,
+  "main": "player/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test player/test/*.test.js",
+    "list-displays": "electron . --list-displays",
+    "smoke": "electron . --windowed --smoke",
+    "test:electron": "electron player/test/electron-smoke.js"
+  },
+  "devDependencies": {
+    "electron": "^39.2.7"
+  },
+  "dependencies": {
+    "parse5": "^7.3.0"
+  }
+}

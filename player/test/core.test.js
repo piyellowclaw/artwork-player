@@ -1,0 +1,25 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os');
+const {loadConfig,defaults,nextPosition}=require('../config');
+const {createServer,prepareHtml}=require('../server');
+function fixture(t,manifest){const root=fs.mkdtempSync(path.join(os.tmpdir(),'art-player-'));fs.mkdirSync(root+'/artworks');fs.writeFileSync(root+'/artworks/index.html','<html><script>window.test=1;</script></html>');fs.writeFileSync(root+'/artworks/manifest.json',JSON.stringify(manifest));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));return root;}
+const art={id:'test',title:'Test',path:'artworks/index.html',completion:'fxpreview'};
+test('defaults are three generations, ten second hold, 600ms fade',()=>assert.deepEqual([defaults.repetitions,defaults.holdMs,defaults.fadeMs],[3,10000,600]));
+test('array manifest accepted',t=>assert.equal(loadConfig(fixture(t,[art])).artworks.length,1));
+test('object manifest merges configuration',t=>assert.equal(loadConfig(fixture(t,{config:{repetitions:5},artworks:[art]})).repetitions,5));
+test('manual is safe fallback, never assume fxpreview',t=>assert.equal(loadConfig(fixture(t,[{...art,completion:undefined}])).artworks[0].completion,'manual'));
+for(const [name,value]of Object.entries({empty:[],duplicate:[art,art],traversal:[{...art,path:'artworks/../player/main.js'}],absolute:[{...art,path:'/tmp/index.html'}],unknown:[{...art,completion:'guess'}],duration:[{...art,completion:'timeout'}]}))test('reject '+name,t=>assert.throws(()=>loadConfig(fixture(t,value))));
+test('repetition advances after third then wraps',()=>{let p={index:0,repeat:0};const seen=[];for(let i=0;i<7;i++){seen.push([p.index,p.repeat]);p=nextPosition(p.index,p.repeat,2,3);}assert.deepEqual(seen,[[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[0,0]]);});
+test('HTML script gating preserves bodies and script MIME',()=>{const s=prepareHtml('<script src="x.js"></script><script type="module">Math.random()</script>');assert.equal(s.split('application/x-artwork-held').length-1,2);assert.ok(s.includes('data-art-type="module"'));assert.ok(s.includes('Math.random()'));assert.ok(s.startsWith('<script src="/player/artwork-bridge.js">'));});
+test('server injects response only, denies traversal and symlink escapes',async t=>{const root=fixture(t,[art]);const config=loadConfig(root),server=createServer(root,config);await new Promise(r=>server.listen(0,'127.0.0.1',r));t.after(()=>server.close());const base='http://127.0.0.1:'+server.address().port;const before=fs.readFileSync(root+'/artworks/index.html','utf8');const response=await fetch(base+'/artworks/index.html?run=abc');assert.ok((await response.text()).includes('artwork-bridge.js'));assert.equal(fs.readFileSync(root+'/artworks/index.html','utf8'),before);assert.equal((await fetch(base+'/TASK.md')).status,404);fs.symlinkSync('/etc/hosts',root+'/artworks/escape');assert.equal((await fetch(base+'/artworks/escape')).status,404);assert.deepEqual(await(await fetch(base+'/config.json')).json(),config);});
+
+const {isAllowedRequest}=require('../security');
+for(const url of ['https://example.com/x','http://localhost:9999/x','http://127.0.0.1:9999/x','file:///etc/hosts','wss://example.com/','http://127.0.0.1.evil.test:123/x'])test('offline denies '+url,()=>assert.equal(isAllowedRequest(url,'http://127.0.0.1:123'),false));
+test('offline allows exact origin and memory URLs',()=>{for(const url of ['http://127.0.0.1:123/x','data:image/png;base64,AA','blob:http://127.0.0.1:123/uuid','about:blank'])assert.equal(isAllowedRequest(url,'http://127.0.0.1:123'),true);});
+test('parser preserves doctype, script bodies and non-JS data',()=>{const source='<!doctype html><html><head><script type=application/json>{"x":"<script>"}</script><script type=module>const source="<script>";const rng=Math.random()</script></head><body onload="go()"></body></html>';const out=prepareHtml(source);assert.ok(out.startsWith('<!doctype html>'));assert.ok(out.includes('const source="<script>";const rng=Math.random()'));assert.ok(out.includes('<script type=application/json>{"x":"<script>"}</script>'));assert.ok(out.includes('data-art-event-onload="go()"'));assert.equal(out.split('application/x-artwork-held').length-1,1);});
+
+test('setup completion is supported',t=>assert.equal(loadConfig(fixture(t,[{...art,completion:'setup'}])).artworks[0].completion,'setup'));
+test('only audited analytics and Human Flow missing reference are removed',()=>{
+ const source=`<script src="https://www.googletagmanager.com/gtag/js?id=G-D3VYKTX0TN"></script><script>window.dataLayer = window.dataLayer || []; function gtag(){}; gtag('config', 'G-D3VYKTX0TN');</script><script src="colorSetting.js"></script><script src="unknown.js"></script>`;
+ const output=prepareHtml(source,'artworks/2023-Human-Flow/index.html');assert.ok(!output.includes('googletagmanager'));assert.ok(!output.includes('dataLayer'));assert.ok(!output.includes('src="colorSetting.js"'));assert.ok(output.includes('src="unknown.js"'));assert.ok(prepareHtml(source,'artworks/2023-Zen-Pots/index.html').includes('src="colorSetting.js"'));
+});

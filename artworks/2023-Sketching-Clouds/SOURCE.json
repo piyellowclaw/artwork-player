@@ -1,0 +1,36 @@
+{
+  "source": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/",
+  "importedAt": "2026-11-03T17:32:16.061Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 13686,
+      "sha256": "4b5c0284d116741e3bb062374484831ba6c49455ce331fe4b1b566a312877fec",
+      "url": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 898365,
+      "sha256": "15365a01a2c17643af1a632f6404b88e435bcecf2cce4b70e5624a95a6d13d33",
+      "url": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 8497,
+      "sha256": "c38ad5978cf9acc744c2c3a2488cb28193eda9a40653cd2af9db3b2b69ff253f",
+      "url": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/sketch.js"
+    },
+    {
+      "path": "NYCircle.js",
+      "bytes": 2351,
+      "sha256": "fa366a451f6fdc6e110887a4a6200776f0e41f05fee904d0747e024fe3294e68",
+      "url": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/NYCircle.js"
+    },
+    {
+      "path": "path.js",
+      "bytes": 7422,
+      "sha256": "5b4aa67ca47d28fca1c6cf29a3d505616f8558e4268b8d70f344d6c87fe9ded1",
+      "url": "https://sketch.newyellow.xyz/2023-Sketching-Clouds/path.js"
+    }
+  ]
+}

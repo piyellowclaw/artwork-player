@@ -1,0 +1,24 @@
+{
+  "source": "https://sketch.newyellow.xyz/2022-Recursive-and-Blocks/",
+  "importedAt": "2026-11-03T17:32:18.665Z",
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 5333,
+      "sha256": "ac7611e9f8e5485caef616e7d6469327002f636f2c9bbea5d1ba37f0d2db3aa1",
+      "url": "https://sketch.newyellow.xyz/2022-Recursive-and-Blocks/index.html"
+    },
+    {
+      "path": "p5.min.js",
+      "bytes": 823171,
+      "sha256": "fbf1485eb7690e97c35d7525f8c67718109654d96c233e9d2cbb65ab4b8626f7",
+      "url": "https://sketch.newyellow.xyz/2022-Recursive-and-Blocks/p5.min.js"
+    },
+    {
+      "path": "sketch.js",
+      "bytes": 15675,
+      "sha256": "3a56aa2b1c86a627647b79961ff6e6ff2f97bfa2b8f95ea1ec595bb181e4533b",
+      "url": "https://sketch.newyellow.xyz/2022-Recursive-and-Blocks/sketch.js"
+    }
+  ]
+}
