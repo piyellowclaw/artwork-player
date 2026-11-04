@@ -66,3 +66,5 @@ The bridge supports ordinary classic/module script artwork pages. Arbitrary docu
 Full eight-artwork verification: `npx electron player/test/real-artworks.js` (windowed; can take minutes). Chinese launch guide: [QUICKSTART.zh-TW.md](QUICKSTART.zh-TW.md). Third-party licenses and complete p5 source archives: [THIRD-PARTY.md](THIRD-PARTY.md).
 
 Exhibition launch hides the cursor, routine status and help overlays; failures/watchdog warnings remain visible. Windowed preview retains debug status and keyboard hints.
+
+Exhibition mode raises only the selected player window above the macOS menu bar using Electron's screen-saver always-on-top level. The window is configured before it is shown, and can cover other windows on that screen; Esc still exits. --windowed preview stays at normal level. No system menu-bar preferences, kiosk mode, global shortcuts or display settings are changed. Physical multi-display/Spaces behavior should be checked on the exhibition Mac.

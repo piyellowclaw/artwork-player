@@ -45,3 +45,5 @@ npm start -- --display 0
 Recursive and Blocks 已跳過背景紋理繪製，保留底色和主要圖形。其原始函式仍保留便於之後修改。跳過這段也會省略原本亂數消耗，因此同 seed 與原網站紋理版不保證相同構圖。
 
 詳見 README.md、ARTWORKS.md 與 audit/ 下的驗證記錄。首次安裝需要下載 npm/Electron 套件；安裝完成後播放作品不需要網路。修改後建議先用 --windowed 驗證，再放上展演螢幕。
+
+正式展演模式會把所選螢幕的播放器視窗提高到 macOS menu bar 上方，因此也會蓋住該螢幕其他一般視窗；Esc 可退出。--windowed 預覽不置頂。這不會修改系統 menu bar 設定，也不使用 kiosk 鎖定模式。

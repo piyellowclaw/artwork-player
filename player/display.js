@@ -13,5 +13,11 @@ function selectDisplay(displays,primary,args){
  if(!target)throw Error('Display '+(flag==='--display-id'?'ID ':'index ')+n+' not found; use --list-displays');
  return target;
 }
-function exhibitionOptions(bounds){return {...bounds,frame:false,roundedCorners:false,hasShadow:false,thickFrame:false,transparent:false,show:true,resizable:false,movable:false};}
-module.exports={listDisplays,selectDisplay,exhibitionOptions};
+function exhibitionOptions(bounds){return {...bounds,frame:false,roundedCorners:false,hasShadow:false,thickFrame:false,transparent:false,show:false,resizable:false,movable:false};}
+function configureExhibitionWindow(win,{windowed=false,platform=process.platform}={}){
+ if(windowed)return;
+ win.setHasShadow(false);
+ if(platform==='darwin'){win.setWindowButtonVisibility(false);win.setAlwaysOnTop(true,'screen-saver');}
+ else win.setAlwaysOnTop(true);
+}
+module.exports={listDisplays,selectDisplay,exhibitionOptions,configureExhibitionWindow};

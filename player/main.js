@@ -2,7 +2,7 @@
 const {app,BrowserWindow,screen,session}=require('electron');
 const path=require('node:path');
 const {loadConfig}=require('./config');
-const {listDisplays,selectDisplay,exhibitionOptions}=require('./display');
+const {listDisplays,selectDisplay,exhibitionOptions,configureExhibitionWindow}=require('./display');
 const {createServer}=require('./server');
 const {isAllowedRequest}=require('./security');
 const root=path.resolve(__dirname,'..'),args=process.argv.slice(2);
@@ -19,12 +19,13 @@ app.whenReady().then(async()=>{
  offline.webRequest.onBeforeRequest((details,cb)=>{const allowed=isAllowedRequest(details.url,origin); if(!allowed)console.warn('OFFLINE BLOCK',details.url);cb({cancel:!allowed});});
  const windowed=args.includes('--windowed');
  const win=new BrowserWindow({...(windowed?{width:1000,height:700,show:true}:exhibitionOptions(target.bounds)),backgroundColor:'#000000',autoHideMenuBar:true,webPreferences:{session:offline,nodeIntegration:false,contextIsolation:true,sandbox:true,webSecurity:true,backgroundThrottling:false}});
- if(!windowed){win.setHasShadow(false);if(process.platform==='darwin')win.setWindowButtonVisibility(false);}
+ configureExhibitionWindow(win,{windowed});
  win.webContents.setWindowOpenHandler(()=>({action:'deny'}));
  win.webContents.on('will-navigate',(e,url)=>{if(!url.startsWith(origin+'/'))e.preventDefault();});
  win.webContents.on('before-input-event',(e,input)=>{if(input.type!=='keyDown')return;if(input.key==='Escape'){e.preventDefault();win.close();return;}const key=({Right:'ArrowRight',Space:' '})[input.key]||input.key;if(['ArrowRight',' ','Enter'].includes(key)){e.preventDefault();win.webContents.executeJavaScript('window.dispatchEvent(new KeyboardEvent(\"keydown\",{key:'+JSON.stringify(key)+'}))').catch(console.error);}});
  win.webContents.on('console-message',(event)=>{console.log('[renderer]',event.message);});
  await win.loadURL(origin+(windowed?'':'/?exhibition=1'));
+ if(!windowed)win.show();
  if(args.includes('--smoke')){
   setTimeout(async()=>{try{const state=await win.webContents.executeJavaScript('window.playerState()');console.log('SMOKE_STATE '+JSON.stringify(state));if(!state.current||state.frames>2)process.exitCode=1;}catch(e){console.error(e);process.exitCode=1;}finally{win.close();}},15000);
  }
