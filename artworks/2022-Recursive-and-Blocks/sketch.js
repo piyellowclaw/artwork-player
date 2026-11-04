@@ -52,14 +52,10 @@ async function setup() {
 
   longSide = 4000 * scaler * deviceScaler;
 
-  if (isLandscape) {
-    canvasWidth = longSide;
-    canvasHeight = longSide * 0.75;
-  }
-  else {
-    canvasWidth = longSide * 0.75;
-    canvasHeight = longSide;
-  }
+  // Generate at viewport aspect ratio, retaining the original resolution budget.
+  const viewportSize = getViewportCanvasSize(width, height, longSide);
+  canvasWidth = viewportSize.width;
+  canvasHeight = viewportSize.height;
 
   console.log(`rendering: ${canvasWidth} x ${canvasHeight}`);
   mainCanvas = createGraphics(canvasWidth, canvasHeight);
@@ -102,6 +98,7 @@ async function setup() {
   if (isFxpreview) {
     fxpreview();
   }
+  draw(); // Composite the final generated block before stopping the draw loop.
   noLoop();
 }
 
@@ -111,7 +108,7 @@ async function startDraw() {
 
   console.log("amount: " + blockWCount + "," + blockHCount);
 
-  let padding = 100 * scaler;
+  let padding = 0; // Edge-to-edge composition; no fixed paper margin.
 
   let blockWidth = (canvasWidth - padding * 2) / blockWCount
   let blockHeight = (canvasHeight - padding * 2) / blockHCount;
@@ -524,52 +521,17 @@ class NYNoiseMap {
   }
 }
 
+function getViewportCanvasSize(viewportWidth, viewportHeight, resolution) {
+  const w = Math.max(1, viewportWidth);
+  const h = Math.max(1, viewportHeight);
+  const scale = Math.max(1, resolution) / Math.max(w, h);
+  return { width: Math.max(1, Math.round(w * scale)), height: Math.max(1, Math.round(h * scale)) };
+}
+
 function draw() {
   if (mainCanvas != null) {
-
     blendMode(BLEND);
-
-    let drawRatio = width / height;
-    let canvasRatio = canvasWidth / canvasHeight;
-
-    let drawWidth = width;
-    let drawHeight = height;
-    let xPadding = 0;
-    let yPadding = 0;
-
-    if (isLandscape) {
-      drawWidth = width;
-      drawHeight = width * 0.75;
-
-      xPadding = 0;
-      yPadding = (height - drawHeight) / 2;
-
-      if (drawHeight > height) {
-        drawWidth = height / 0.75;
-        drawHeight = height;
-
-        xPadding = (width - drawWidth) / 2;
-        yPadding = 0.0;
-      }
-    }
-    else {
-      drawWidth = height * 0.75;
-      drawHeight = height;
-
-      xPadding = (width - drawWidth) / 2;
-      yPadding = 0.0;
-
-      if (drawWidth > width) {
-        drawWidth = width;
-        drawHeight = width / 0.75;
-
-        xPadding = 0.0;
-        yPadding = (height - drawHeight) / 2;
-      }
-    }
-
-    background(10);
-    image(mainCanvas, xPadding, yPadding, drawWidth, drawHeight);
+    image(mainCanvas, 0, 0, width, height);
   }
 }
 

@@ -1,3 +1,10 @@
-# Local playback modification
-Removed the setup call to NYRandomTextureLines() to skip the expensive background texture pass, as requested. The texture function remains available for future editing, but is not invoked during generation. Background color and all block/triangle drawing remain.
-SOURCE.json records the original upstream file checksums; sketch.js intentionally differs after this modification. Removing the pass also skips its random-number consumption, so the same fxhash can produce a different block composition than the original textured version.
+# Local playback modifications
+
+- Skip the expensive NYRandomTextureLines() background-texture pass. Texture function remains in source but is not invoked.
+- Generate mainCanvas using the current viewport aspect ratio, keeping the original long-edge resolution budget (4000 * scaler * deviceScaler, default 2000).
+- Remove the fixed 100*scaler paper margin so the recursive base grid extends to every edge.
+- Composite mainCanvas directly over the full viewport (no fixed 4:3 / 3:4 layout, letterboxing or center-cropping). Draw the final generated buffer before noLoop.
+
+Block/triangle drawing, color and random generator functions are unchanged. Orientation trait RNG is still consumed as before, but no longer determines the drawing dimensions. Texture removal and new composition dimensions/margins intentionally change the output compared with the original fixed-layout version; same fxhash is not a promise of the same original composition. Each new generation uses the viewport dimensions at startup.
+
+SOURCE.json retains the original upstream checksum; upstream/sketch.js is an exact copy of that original and is not loaded by the player. LOCAL-CHANGES.json records upstream and authorized modified sketch checksums, checked by scripts/verify-sources.mjs. Update that metadata deliberately when making future local edits.

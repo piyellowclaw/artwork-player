@@ -11,8 +11,9 @@ for(const dir of await fs.readdir('artworks')){
   const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
   if(hash(data)===f.sha256){unchanged++;continue;}
   if(dir==='2022-Recursive-and-Blocks'&&f.path==='sketch.js'){
-   const restored=data.toString().replace('  // Background texture pass removed for local playback (requested by Newyellow).\n  // await NYRandomTextureLines();','  await NYRandomTextureLines();');
-   if(hash(restored)!==f.sha256)throw Error('Unexpected Recursive source change');
+   const changes=JSON.parse(await fs.readFile(path.join('artworks',dir,'LOCAL-CHANGES.json'),'utf8'));
+   const upstream=await fs.readFile(path.join('artworks',dir,'upstream/sketch.js'));
+   if(hash(upstream)!==f.sha256||changes.upstreamSha256!==f.sha256||hash(data)!==changes.localSketchSha256)throw Error('Unexpected Recursive source change');
    modified++;continue;
   }
   throw Error('Unexpected source change: '+dir+'/'+f.path);

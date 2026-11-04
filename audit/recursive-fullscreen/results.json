@@ -1,0 +1,321 @@
+{
+  "startedAt": "2026-11-04T04:26:26.361Z",
+  "runtime": {
+    "node": "22.22.1",
+    "acorn": "8.15.0",
+    "ada": "2.9.2",
+    "amaro": "1.1.5",
+    "ares": "1.34.6",
+    "brotli": "1.0.9",
+    "cjs_module_lexer": "2.2.0",
+    "cldr": "44.1",
+    "icu": "74.2",
+    "llhttp": "9.3.0",
+    "modules": "140",
+    "napi": "10",
+    "nbytes": "0.1.1",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.64.0",
+    "openssl": "0.0.0",
+    "simdjson": "4.2.4",
+    "simdutf": "7.3.3",
+    "sqlite": "3.51.2",
+    "tz": "2025b",
+    "undici": "6.23.0",
+    "unicode": "15.1",
+    "uv": "1.51.0",
+    "uvwasi": "0.0.23",
+    "v8": "14.2.231.22-electron.0",
+    "zlib": "1.3.1",
+    "zstd": "1.5.8",
+    "electron": "39.8.10",
+    "chrome": "142.0.7444.265"
+  },
+  "seed": "oo123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRST",
+  "offline": true,
+  "windowed": true,
+  "cases": [
+    {
+      "name": "wide",
+      "requested": {
+        "width": 800,
+        "height": 450
+      },
+      "blocked": [],
+      "httpFailures": [],
+      "consoleErrors": [],
+      "elapsedMs": 9900,
+      "state": {
+        "current": {
+          "id": "2022-Recursive-and-Blocks",
+          "repeat": 0,
+          "done": true,
+          "started": true,
+          "failed": false,
+          "token": "19c3b986-dafb-457c-96b7-5ee3624e8df4",
+          "round": 0,
+          "slot": 0
+        },
+        "pending": {
+          "id": "2022-Recursive-and-Blocks",
+          "ready": true
+        },
+        "phase": "idle",
+        "advancing": false,
+        "frames": 2,
+        "status": "Recursive and Blocks · 1/1 · completed: setup"
+      },
+      "pixels": {
+        "viewport": {
+          "width": 800,
+          "height": 450
+        },
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 450
+        },
+        "backing": {
+          "width": 800,
+          "height": 450
+        },
+        "main": {
+          "width": 2000,
+          "height": 1125
+        },
+        "canvasWidth": 2000,
+        "canvasHeight": 1125,
+        "longSide": 2000,
+        "drawFinished": true,
+        "looping": false,
+        "fxhash": "oo123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRST",
+        "features": {
+          "Base Grid": "(3,2)",
+          "Color Hue": "130°",
+          "Color Type": "Single Tone",
+          "Triangle Chance": "Medium",
+          "Paper Color": "Light",
+          "Canvas": "Landscape",
+          "Paper Texture": "Horizontal"
+        },
+        "differing": 0,
+        "maxDelta": 0,
+        "transparent": 0,
+        "colors": 70654,
+        "edges": {
+          "top": {
+            "black": 0,
+            "n": 800
+          },
+          "bottom": {
+            "black": 0,
+            "n": 800
+          },
+          "left": {
+            "black": 0,
+            "n": 450
+          },
+          "right": {
+            "black": 0,
+            "n": 450
+          }
+        },
+        "p5Version": "1.4.1"
+      },
+      "finalFrameStable": true,
+      "screenshot": "audit/recursive-fullscreen/wide.png",
+      "pass": true
+    },
+    {
+      "name": "portrait",
+      "requested": {
+        "width": 450,
+        "height": 800
+      },
+      "blocked": [],
+      "httpFailures": [],
+      "consoleErrors": [],
+      "elapsedMs": 9488,
+      "state": {
+        "current": {
+          "id": "2022-Recursive-and-Blocks",
+          "repeat": 0,
+          "done": true,
+          "started": true,
+          "failed": false,
+          "token": "71012d48-a9ff-48b3-807b-4c19aa444268",
+          "round": 0,
+          "slot": 0
+        },
+        "pending": {
+          "id": "2022-Recursive-and-Blocks",
+          "ready": true
+        },
+        "phase": "idle",
+        "advancing": false,
+        "frames": 2,
+        "status": "Recursive and Blocks · 1/1 · completed: setup"
+      },
+      "pixels": {
+        "viewport": {
+          "width": 450,
+          "height": 800
+        },
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 450,
+          "height": 800
+        },
+        "backing": {
+          "width": 450,
+          "height": 800
+        },
+        "main": {
+          "width": 1125,
+          "height": 2000
+        },
+        "canvasWidth": 1125,
+        "canvasHeight": 2000,
+        "longSide": 2000,
+        "drawFinished": true,
+        "looping": false,
+        "fxhash": "oo123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRST",
+        "features": {
+          "Base Grid": "(3,2)",
+          "Color Hue": "130°",
+          "Color Type": "Single Tone",
+          "Triangle Chance": "Medium",
+          "Paper Color": "Light",
+          "Canvas": "Landscape",
+          "Paper Texture": "Horizontal"
+        },
+        "differing": 0,
+        "maxDelta": 0,
+        "transparent": 0,
+        "colors": 68737,
+        "edges": {
+          "top": {
+            "black": 0,
+            "n": 450
+          },
+          "bottom": {
+            "black": 0,
+            "n": 450
+          },
+          "left": {
+            "black": 0,
+            "n": 800
+          },
+          "right": {
+            "black": 0,
+            "n": 800
+          }
+        },
+        "p5Version": "1.4.1"
+      },
+      "finalFrameStable": true,
+      "screenshot": "audit/recursive-fullscreen/portrait.png",
+      "pass": true
+    },
+    {
+      "name": "square",
+      "requested": {
+        "width": 600,
+        "height": 600
+      },
+      "blocked": [],
+      "httpFailures": [],
+      "consoleErrors": [],
+      "elapsedMs": 11521,
+      "state": {
+        "current": {
+          "id": "2022-Recursive-and-Blocks",
+          "repeat": 0,
+          "done": true,
+          "started": true,
+          "failed": false,
+          "token": "648c2dd5-a893-4894-bb75-6b4621af8822",
+          "round": 0,
+          "slot": 0
+        },
+        "pending": {
+          "id": "2022-Recursive-and-Blocks",
+          "ready": true
+        },
+        "phase": "idle",
+        "advancing": false,
+        "frames": 2,
+        "status": "Recursive and Blocks · 1/1 · completed: setup"
+      },
+      "pixels": {
+        "viewport": {
+          "width": 600,
+          "height": 600
+        },
+        "rect": {
+          "x": 0,
+          "y": 0,
+          "width": 600,
+          "height": 600
+        },
+        "backing": {
+          "width": 600,
+          "height": 600
+        },
+        "main": {
+          "width": 2000,
+          "height": 2000
+        },
+        "canvasWidth": 2000,
+        "canvasHeight": 2000,
+        "longSide": 2000,
+        "drawFinished": true,
+        "looping": false,
+        "fxhash": "oo123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRST",
+        "features": {
+          "Base Grid": "(3,2)",
+          "Color Hue": "130°",
+          "Color Type": "Single Tone",
+          "Triangle Chance": "Medium",
+          "Paper Color": "Light",
+          "Canvas": "Landscape",
+          "Paper Texture": "Horizontal"
+        },
+        "differing": 0,
+        "maxDelta": 0,
+        "transparent": 0,
+        "colors": 62603,
+        "edges": {
+          "top": {
+            "black": 0,
+            "n": 600
+          },
+          "bottom": {
+            "black": 0,
+            "n": 600
+          },
+          "left": {
+            "black": 0,
+            "n": 600
+          },
+          "right": {
+            "black": 0,
+            "n": 600
+          }
+        },
+        "p5Version": "1.4.1"
+      },
+      "finalFrameStable": true,
+      "screenshot": "audit/recursive-fullscreen/square.png",
+      "pass": true
+    }
+  ],
+  "source": {
+    "upstreamSha256": "3a56aa2b1c86a627647b79961ff6e6ff2f97bfa2b8f95ea1ec595bb181e4533b",
+    "localSha256": "cf5d5dff981b888fd6c6c7dea25c84d295e3e87dfecce899a4ef88363019a9f2",
+    "algorithmsAndRngUnchanged": true
+  },
+  "verdict": "PASS"
+}
