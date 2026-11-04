@@ -17,13 +17,16 @@ function inspect(){
  const c=document.querySelector('canvas'),r=c.getBoundingClientRect(),ctx=c.getContext('2d');
  const expected=document.createElement('canvas');expected.width=c.width;expected.height=c.height;expected.getContext('2d').drawImage(mainCanvas.canvas,0,0,c.width,c.height);
  const actual=ctx.getImageData(0,0,c.width,c.height).data,ref=expected.getContext('2d').getImageData(0,0,c.width,c.height).data;
+ const padX=Math.max(1,Math.floor(100*scaler*c.width/mainCanvas.width)-1),padY=Math.max(1,Math.floor(100*scaler*c.height/mainCanvas.height)-1);
+ let marginMismatch=0;
  let differing=0,maxDelta=0,transparent=0;const colors=new Set();const edges={top:{black:0,n:0},bottom:{black:0,n:0},left:{black:0,n:0},right:{black:0,n:0}};
  for(let y=0;y<c.height;y++)for(let x=0;x<c.width;x++){
   const i=(y*c.width+x)*4;let diff=false;for(let k=0;k<4;k++){const d=Math.abs(actual[i+k]-ref[i+k]);if(d)diff=true;maxDelta=Math.max(maxDelta,d);}if(diff)differing++;
+  if(x<padX||x>=c.width-padX||y<padY||y>=c.height-padY){for(let k=0;k<4;k++)if(actual[i+k]!==actual[k]){marginMismatch++;break;}}
   if(actual[i+3]!==255)transparent++;colors.add((actual[i]<<16)|(actual[i+1]<<8)|actual[i+2]);
   for(const key of [y===0?'top':null,y===c.height-1?'bottom':null,x===0?'left':null,x===c.width-1?'right':null].filter(Boolean)){edges[key].n++;if(actual[i]<4&&actual[i+1]<4&&actual[i+2]<4)edges[key].black++;}
  }
- return {viewport:{width:innerWidth,height:innerHeight},rect:{x:r.x,y:r.y,width:r.width,height:r.height},backing:{width:c.width,height:c.height},main:{width:mainCanvas.width,height:mainCanvas.height},canvasWidth,canvasHeight,longSide,drawFinished,looping:isLooping(),fxhash,features:window.$fxhashFeatures,differing,maxDelta,transparent,colors:colors.size,edges,p5Version:p5.VERSION};
+ return {viewport:{width:innerWidth,height:innerHeight},rect:{x:r.x,y:r.y,width:r.width,height:r.height},backing:{width:c.width,height:c.height},main:{width:mainCanvas.width,height:mainCanvas.height},canvasWidth,canvasHeight,longSide,drawFinished,looping:isLooping(),fxhash,features:window.$fxhashFeatures,differing,maxDelta,transparent,colors:colors.size,edges,margin:{padX,padY,mismatch:marginMismatch},p5Version:p5.VERSION};
 }
 app.whenReady().then(async()=>{
  fs.mkdirSync(out,{recursive:true});
@@ -42,7 +45,7 @@ app.whenReady().then(async()=>{
  for(const [name,w,h] of [['wide',800,450],['portrait',450,800],['square',600,600]]){
   active={name,requested:{width:w,height:h},blocked:[],httpFailures:[],consoleErrors:[]};results.cases.push(active);const began=Date.now();win.setContentSize(w,h);assert.equal(win.isFullScreen(),false);assert.equal(win.isAlwaysOnTop(),false);
   await win.loadURL(origin+'/?exhibition=1');await until('playerState().current?.done&&!playerState().advancing','genuine setup completion');active.elapsedMs=Date.now()-began;active.state=await js('playerState()');assert.ok(active.state.status.includes('completed: setup'));
-  active.pixels=await inArt(inspect);const p=active.pixels;assert.deepEqual(p.viewport,{width:w,height:h});assert.deepEqual(p.rect,{x:0,y:0,width:w,height:h});assert.equal(Math.max(p.main.width,p.main.height),2000);assert.equal(p.main.width/p.main.height,w/h);assert.equal(p.drawFinished,true);assert.equal(p.looping,false);assert.equal(p.fxhash,fixedSeed);assert.equal(p.differing,0,'final display must equal complete mainCanvas composite, every pixel');assert.equal(p.transparent,0);assert.ok(p.colors>100);for(const e of Object.values(p.edges))assert.equal(e.black,0,'no black letterbox edge');assert.equal(active.blocked.length,0);assert.equal(active.httpFailures.length,0);assert.equal(active.consoleErrors.length,0);
+  active.pixels=await inArt(inspect);const p=active.pixels;assert.deepEqual(p.viewport,{width:w,height:h});assert.deepEqual(p.rect,{x:0,y:0,width:w,height:h});assert.equal(Math.max(p.main.width,p.main.height),2000);assert.equal(p.main.width/p.main.height,w/h);assert.equal(p.drawFinished,true);assert.equal(p.looping,false);assert.equal(p.fxhash,fixedSeed);assert.equal(p.differing,0,'final display must equal complete mainCanvas composite, every pixel');assert.equal(p.transparent,0);assert.ok(p.colors>100);assert.ok(p.margin.padX>1&&p.margin.padY>1);assert.equal(p.margin.mismatch,0,'all four padding bands preserve uniform paper color');for(const e of Object.values(p.edges))assert.equal(e.black,0,'no black letterbox edge');assert.equal(active.blocked.length,0);assert.equal(active.httpFailures.length,0);assert.equal(active.consoleErrors.length,0);
   const before=await inArt(()=>document.querySelector('canvas').toDataURL());await sleep(200);assert.equal(await inArt(()=>document.querySelector('canvas').toDataURL()),before);active.finalFrameStable=true;
   active.screenshot='audit/recursive-fullscreen/'+name+'.png';fs.writeFileSync(path.join(root,active.screenshot),(await win.webContents.capturePage()).toPNG());active.pass=true;save();console.log('CASE_PASS '+JSON.stringify(active));
  }

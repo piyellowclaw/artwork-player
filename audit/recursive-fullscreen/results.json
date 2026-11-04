@@ -1,5 +1,5 @@
 {
-  "startedAt": "2026-11-04T04:26:26.361Z",
+  "startedAt": "2026-11-04T04:32:01.934Z",
   "runtime": {
     "node": "22.22.1",
     "acorn": "8.15.0",
@@ -44,7 +44,7 @@
       "blocked": [],
       "httpFailures": [],
       "consoleErrors": [],
-      "elapsedMs": 9900,
+      "elapsedMs": 6943,
       "state": {
         "current": {
           "id": "2022-Recursive-and-Blocks",
@@ -52,7 +52,7 @@
           "done": true,
           "started": true,
           "failed": false,
-          "token": "19c3b986-dafb-457c-96b7-5ee3624e8df4",
+          "token": "eab16207-e8f3-49ef-91da-1e6146b58bcc",
           "round": 0,
           "slot": 0
         },
@@ -102,7 +102,7 @@
         "differing": 0,
         "maxDelta": 0,
         "transparent": 0,
-        "colors": 70654,
+        "colors": 52355,
         "edges": {
           "top": {
             "black": 0,
@@ -121,6 +121,11 @@
             "n": 450
           }
         },
+        "margin": {
+          "padX": 19,
+          "padY": 19,
+          "mismatch": 0
+        },
         "p5Version": "1.4.1"
       },
       "finalFrameStable": true,
@@ -136,7 +141,7 @@
       "blocked": [],
       "httpFailures": [],
       "consoleErrors": [],
-      "elapsedMs": 9488,
+      "elapsedMs": 10084,
       "state": {
         "current": {
           "id": "2022-Recursive-and-Blocks",
@@ -144,7 +149,7 @@
           "done": true,
           "started": true,
           "failed": false,
-          "token": "71012d48-a9ff-48b3-807b-4c19aa444268",
+          "token": "760d6bf1-127e-4fb3-9a5a-8ad1ae183ab6",
           "round": 0,
           "slot": 0
         },
@@ -194,7 +199,7 @@
         "differing": 0,
         "maxDelta": 0,
         "transparent": 0,
-        "colors": 68737,
+        "colors": 72538,
         "edges": {
           "top": {
             "black": 0,
@@ -213,6 +218,11 @@
             "n": 800
           }
         },
+        "margin": {
+          "padX": 19,
+          "padY": 19,
+          "mismatch": 0
+        },
         "p5Version": "1.4.1"
       },
       "finalFrameStable": true,
@@ -228,7 +238,7 @@
       "blocked": [],
       "httpFailures": [],
       "consoleErrors": [],
-      "elapsedMs": 11521,
+      "elapsedMs": 14507,
       "state": {
         "current": {
           "id": "2022-Recursive-and-Blocks",
@@ -236,7 +246,7 @@
           "done": true,
           "started": true,
           "failed": false,
-          "token": "648c2dd5-a893-4894-bb75-6b4621af8822",
+          "token": "c1307967-3b93-4fa8-b135-7e7c27405bc5",
           "round": 0,
           "slot": 0
         },
@@ -286,7 +296,7 @@
         "differing": 0,
         "maxDelta": 0,
         "transparent": 0,
-        "colors": 62603,
+        "colors": 72801,
         "edges": {
           "top": {
             "black": 0,
@@ -305,6 +315,11 @@
             "n": 600
           }
         },
+        "margin": {
+          "padX": 14,
+          "padY": 14,
+          "mismatch": 0
+        },
         "p5Version": "1.4.1"
       },
       "finalFrameStable": true,
@@ -314,7 +329,7 @@
   ],
   "source": {
     "upstreamSha256": "3a56aa2b1c86a627647b79961ff6e6ff2f97bfa2b8f95ea1ec595bb181e4533b",
-    "localSha256": "cf5d5dff981b888fd6c6c7dea25c84d295e3e87dfecce899a4ef88363019a9f2",
+    "localSha256": "4ccfd7b439f7fdf03ae70728e052050e63123e58f8cc8162d3ad9d9c0b2946ef",
     "algorithmsAndRngUnchanged": true
   },
   "verdict": "PASS"

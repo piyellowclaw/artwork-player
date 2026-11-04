@@ -108,7 +108,7 @@ async function startDraw() {
 
   console.log("amount: " + blockWCount + "," + blockHCount);
 
-  let padding = 0; // Edge-to-edge composition; no fixed paper margin.
+  let padding = 100 * scaler; // Original internal paper margin; viewport remains full-size.
 
   let blockWidth = (canvasWidth - padding * 2) / blockWCount
   let blockHeight = (canvasHeight - padding * 2) / blockHCount;

@@ -1,10 +1,10 @@
 {
   "upstreamSha256": "3a56aa2b1c86a627647b79961ff6e6ff2f97bfa2b8f95ea1ec595bb181e4533b",
-  "localSketchSha256": "cf5d5dff981b888fd6c6c7dea25c84d295e3e87dfecce899a4ef88363019a9f2",
+  "localSketchSha256": "4ccfd7b439f7fdf03ae70728e052050e63123e58f8cc8162d3ad9d9c0b2946ef",
   "changes": [
     "Skip background texture",
     "Viewport aspect ratio with existing resolution budget",
-    "Remove outer composition margin",
+    "Preserve original internal paper padding (100 * scaler)",
     "Full viewport composite with final-frame flush"
   ]
 }
